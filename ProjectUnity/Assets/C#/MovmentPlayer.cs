@@ -12,7 +12,7 @@ public class MovmentPlayer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+    // Update is called once per 
     void Update()
     {
         float hdirection;
