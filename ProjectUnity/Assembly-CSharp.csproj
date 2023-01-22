@@ -56,9 +56,9 @@
     <Analyzer Include="E:\Vs\ściezpodr\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\C#\MovmentPlayer.cs" />
-    <Compile Include="Assets\C#\Camera.cs" />
     <Compile Include="Assets\C#\PlayerCamera.cs" />
+    <Compile Include="Assets\C#\MovmentPlayer.cs" />
+    <Compile Include="Assets\C#\EnemyAI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

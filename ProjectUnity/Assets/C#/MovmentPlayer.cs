@@ -4,27 +4,71 @@ using UnityEngine;
 
 public class MovmentPlayer : MonoBehaviour
 {
-    public float speed = 1f;
-    private Rigidbody rb;
-    // Start is called before the first frame update
-    void Start()
+    public Transform orientation;
+    public float moveSpeed;
+    public float normalSpeed;
+    public float slowSpeed;
+    public KeyCode slowKey = KeyCode.LeftShift;
+
+    float horizontalInput;
+    float verticalInput;
+
+    Vector3 moveDirection;
+
+    public Rigidbody rb;
+
+
+    private void Start()
     {
+
         rb = GetComponent<Rigidbody>();
-    }
+        rb.freezeRotation = true;
 
-    // Update is called once per 
-    void Update()
+    }
+    private void Update()
     {
-        float hdirection;
-        float vdirection;
-        if ((hdirection = Input.GetAxis("Horizontal")) !=0)
-        {
-           rb.AddForce(hdirection * Time.deltaTime * speed, 0, 0);
-        }
 
-        if ((vdirection = Input.GetAxis("Vertical")) !=0)
+
+        myInput();
+        whichMovement();
+
+    }
+
+    private void whichMovement()
+    {
+        if (Input.GetKey(slowKey))
         {
-           rb.AddForce( 0, 0, vdirection * Time.deltaTime * speed);
+            moveSpeed = slowSpeed;
+            rb.AddForce(moveDirection / slowSpeed, ForceMode.Force);
+
+        }
+        else
+        {
+            moveSpeed = 20f;
+
         }
     }
+
+
+
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+
+
+    private void myInput()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+    }
+
+    public void Move()
+    {
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        rb.AddForce(-rb.velocity * 2 + moveDirection * moveSpeed, ForceMode.Force);
+    }
+
 }
